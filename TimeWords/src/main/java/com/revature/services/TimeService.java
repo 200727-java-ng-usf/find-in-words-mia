@@ -9,6 +9,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.text.ParseException;
 import java.time.LocalTime;
 import java.util.ArrayList;
 import java.util.List;
@@ -43,8 +44,9 @@ public class TimeService {
         return stringEvents;
     }
 
-    public Event registerNewEvent(Event newEvent) {
-        return timeRepo.save(newEvent);
+    public Event registerNewEvent(EventDTO newEvent) throws ParseException {
+        Event event = new Event(newEvent);
+        return timeRepo.save(event);
     }
 
     public String getTimeInWords(Time time) {
@@ -53,6 +55,7 @@ public class TimeService {
     }
 
     static String timeInWords(int h, int m) {
+        System.out.println(h);
         String message = "";
         String hour = "";
         int minutes = 0;
@@ -71,6 +74,9 @@ public class TimeService {
             qualifier =  ("half past");
         }
 
+        if (h > 12) {
+            h = h - 12;
+        }
 
         if (h == 1) {
             hour = "one";;
@@ -138,7 +144,7 @@ public class TimeService {
         } else if (minutes == 15) {
             minute = ("quarter");
         } else if (minutes == 16) {
-            minute = ("sixteen minute" );
+            minute = ("sixteen minutes" );
         } else if (minutes == 17) {
             minute = ("seventeen minutes");
         } else if (minutes == 18) {

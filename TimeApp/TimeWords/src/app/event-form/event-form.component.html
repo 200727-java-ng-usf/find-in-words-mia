@@ -1,0 +1,19 @@
+<form>
+    <label>
+        Name:
+        <input type="text"
+        [(ngModel)]="this.name" name="name">
+    </label>
+    <br>
+    <label>
+        Location:
+        <input type="text" [(ngModel)]="this.loc" name="loc">
+    </label>
+    <br>
+    <label>
+        Time:
+        <input type="text" [(ngModel)]="this.time" name="time">
+    </label>
+    <button type="submit" (click)="onSubmit()">Submit</button>
+</form>
+

@@ -1,8 +1,16 @@
 package com.revature.models;
 
 import javax.persistence.*;
+import javax.xml.crypto.Data;
 import java.sql.Time;
+import java.text.DateFormat;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.time.LocalDateTime;
 import java.time.LocalTime;
+import java.time.format.DateTimeFormatter;
+import java.util.Date;
+import java.util.Locale;
 import java.util.Objects;
 
 @Entity
@@ -23,8 +31,28 @@ public class Event {
     @Column(nullable=false)
     private LocalTime time;
 
+
+
+
     public Event() {
 
+    }
+
+    public Event(EventDTO event) throws ParseException {
+        DateTimeFormatter formatter =
+                DateTimeFormatter.ofPattern("HH:mm", Locale.US);
+
+        this.name = event.getName();
+        this.location = event.getLocation();
+        LocalTime localTime = LocalTime.parse(event.getTime(), formatter);
+        this.time = localTime;
+    }
+
+    public Event(int id, String name, String location, LocalTime time) {
+        this.id = id;
+        this.name = name;
+        this.location = location;
+        this.time = time;
     }
 
     public int getId() {

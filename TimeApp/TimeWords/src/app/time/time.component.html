@@ -1,0 +1,10 @@
+The time is: {{this.time.time}}
+<br>
+
+<table class="table">
+    <tr *ngFor="let x of this.events">
+        <td>{{ x.name }}</td>
+        <td>{{ x.location }}</td>
+        <td>{{ x.time }}</td>
+    </tr>
+</table>

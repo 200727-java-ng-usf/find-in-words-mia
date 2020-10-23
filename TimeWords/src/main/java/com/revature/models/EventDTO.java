@@ -6,8 +6,6 @@ import java.util.Objects;
 
 public class EventDTO {
 
-    private int id;
-
     private String name;
 
     private String location;
@@ -18,18 +16,9 @@ public class EventDTO {
     }
 
     public EventDTO(int id, String name, String location, String time) {
-        this.id = id;
         this.name = name;
         this.location = location;
         this.time = time;
-    }
-
-    public int getId() {
-        return id;
-    }
-
-    public void setId(int id) {
-        this.id = id;
     }
 
     public String getName() {
@@ -61,22 +50,20 @@ public class EventDTO {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         EventDTO eventDTO = (EventDTO) o;
-        return id == eventDTO.id &&
-                Objects.equals(name, eventDTO.name) &&
+        return Objects.equals(name, eventDTO.name) &&
                 Objects.equals(location, eventDTO.location) &&
                 Objects.equals(time, eventDTO.time);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(id, name, location, time);
+        return Objects.hash(name, location, time);
     }
 
     @Override
     public String toString() {
         return "EventDTO{" +
-                "id=" + id +
-                ", name='" + name + '\'' +
+                "name='" + name + '\'' +
                 ", location='" + location + '\'' +
                 ", time='" + time + '\'' +
                 '}';
